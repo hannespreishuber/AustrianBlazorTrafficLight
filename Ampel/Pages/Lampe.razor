@@ -1,0 +1,63 @@
+﻿@using Ampel.Data
+<div class="circle @Farbeintern"></div>
+
+@code {
+        [Parameter]
+        public string Farbe { get; set; }
+        [Parameter]
+        public Ampel.Data.VisualState DisplayState { get; set; }
+    public string Farbeintern { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        StateChange(DisplayState);
+    }
+
+
+
+    void StateChange(VisualState Animation)
+    {
+        switch (Animation)
+        {
+            case VisualState.Off:
+                Farbeintern = "black";
+                break;
+            case VisualState.Go:
+                if (Farbe == "green")
+                {
+                    Farbeintern = "green";
+                }
+
+                break;
+            case VisualState.GoEnd:
+                if (Farbe == "green")
+                {
+                    Farbeintern = "green blink";
+                }
+
+                break;
+            case VisualState.SwitchRed:
+                if (Farbe == "yellow")
+                {
+                    Farbeintern = "yellow";
+                }
+
+                break;
+            case VisualState.SwitchGreen:
+                if (Farbe == "yellow")
+                {
+                    Farbeintern = "yellow";
+                }
+                break;
+            case VisualState.Stop:
+                if (Farbe == "red")
+                {
+                    Farbeintern = "red";
+                }
+                break;
+            default:
+                break;
+        }
+
+    }
+}

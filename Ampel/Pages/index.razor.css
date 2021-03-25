@@ -1,0 +1,8 @@
+﻿.ampel {
+    background: #222;
+    width: 170px;
+    height: 440px;
+    border-radius: 20px;
+    position: relative;
+    border: solid 5px #333;
+}

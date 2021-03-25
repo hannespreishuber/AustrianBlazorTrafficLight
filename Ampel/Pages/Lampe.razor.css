@@ -1,0 +1,48 @@
+﻿.circle {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 100%;
+    position: relative;
+    height: 120px;
+    width: 120px;
+    margin: 20px;
+}
+
+.black {
+    background-color: black;
+    box-shadow: 0 0;
+}
+
+.red {
+    background-color: #c0392b;
+    box-shadow: 0 0 10px 5px #c0392b;
+}
+
+.yellow {
+    background-color: #ffd800;
+    box-shadow: 0 0 10px 5px #ffd800;
+}
+
+.green {
+    background-color: #7ce857;
+    box-shadow: 0 0 10px 5px #7ce857;
+}
+
+.blink {
+    animation-name: blink;
+    animation-duration: 1s;
+    animation-iteration-count: 10;
+    animation-direction: alternate;
+}
+
+
+@keyframes blink {
+    from {
+        background-color: #7ce857;
+        box-shadow: 0 0 10px 5px #7ce857;
+    }
+
+    to {
+        background-color: black;
+        box-shadow: 0 0 ;
+    }
+}

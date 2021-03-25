@@ -1,0 +1,8 @@
+﻿component Lampe
+-animation css
+Visual Ampel
+
+Status Component-grün, rot ect
+-
+Steuerung Ampel
+-status wechsel, Zeit oder Impuls gesteuert.

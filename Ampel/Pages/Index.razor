@@ -1,0 +1,84 @@
+﻿@page "/"
+@using Ampel.Data
+@inject Ampel.Data.TimerService Timer
+
+<h1>Ampel</h1>
+
+<div class="ampel">
+    <Lampe Farbe="red" DisplayState="@(red)"></Lampe>
+    <Lampe Farbe="yellow" DisplayState="@(yellow)"></Lampe>
+    <Lampe Farbe="green" DisplayState="@(green)"></Lampe>
+</div>
+<button @onclick="statuswechsel">ding</button>
+@code
+{
+    public VisualState ActualState { get; set; }
+    public VisualState red { get; set; }
+    public VisualState yellow { get; set; }
+    public VisualState green { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Timer.OnElapsed += statuswechsel;
+    }
+
+
+
+    public void statuswechsel()
+    {
+
+        switch (ActualState)
+        {
+            case VisualState.Off:
+                ActualState = VisualState.Stop;
+                red = VisualState.Stop;
+                yellow = VisualState.Off;
+                green = VisualState.Off;
+                Timer.SetTimer(3000);
+           
+                break;
+            case VisualState.Stop:
+                ActualState = VisualState.SwitchGreen;
+                red = VisualState.Off;
+                yellow = VisualState.SwitchGreen;
+                green = VisualState.Off;
+                Timer.SetTimer(1000);
+                break;
+            case VisualState.SwitchGreen:
+                ActualState = VisualState.Go;
+                red = VisualState.Off;
+                yellow = VisualState.Off;
+                green = VisualState.Go;
+                Timer.SetTimer(3000);
+                break;
+            case VisualState.SwitchRed:
+                ActualState = VisualState.Stop;
+                red = VisualState.Stop;
+                yellow = VisualState.Off;
+                green = VisualState.Off;
+                Timer.SetTimer(3000);
+                break;
+            case VisualState.Go:
+                ActualState = VisualState.GoEnd;
+                red = VisualState.Off;
+                yellow = VisualState.Off;
+                green = VisualState.GoEnd;
+                Timer.SetTimer(3000);
+                break;
+            case VisualState.GoEnd:
+                ActualState = VisualState.SwitchRed;
+                red = VisualState.Off;
+                yellow = VisualState.SwitchRed;
+                green = VisualState.Off;
+                Timer.SetTimer(1000);
+         
+                break;
+            default:
+                break;
+        }
+
+        InvokeAsync(StateHasChanged);
+
+
+    }
+}
